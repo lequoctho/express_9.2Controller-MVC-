@@ -17,9 +17,19 @@ var actions = [
 ];
 
 // https://expressjs.com/en/starter/basic-routing.html
-app.get("/todos", (req, res) => {
+app.get("/", (req, res) => {
   res.render('index',{
     actions: actions
+  });
+});
+
+app.get("/todos", (req, res) => {
+  var q = req.query.q;
+  var matchAction = actions.filter(function(action){
+    return action.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+  })
+  res.render('index',{
+    actions: matchAction
   });
 });
 
