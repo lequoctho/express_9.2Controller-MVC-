@@ -2,8 +2,8 @@ form(action="/todos")
   input(type="text",name="q")
   button Search
 ul
-  each action in actions
-    li= action.name
+  each todo in todos
+    li= todo.text
     
 form(action="/todos/create", method="POST")
   input(type="text",name="name")

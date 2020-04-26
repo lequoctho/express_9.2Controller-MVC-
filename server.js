@@ -12,33 +12,34 @@ app.set('views','./views');
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-var actions = [
-  {id:1, name: 'đi chợ'},
-  {id:2, name: 'nấu ăn'},
-  {id:3, name: 'rửa bát'},
-  {id:4, name: 'học codersX'},
-  {id:5, name: 'đá bóng'}
-];
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+ 
+const adapter = new FileSync('db.json');
+const db = low(adapter);
+ 
+// Set some defaults
+db.defaults({ todos: []}).write();
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (req, res) => {
   res.render('index',{
-    actions: actions
+    todos: db.get('todos').value()
   });
 });
 
 app.get("/todos", (req, res) => {
   var q = req.query.q;
-  var matchAction = actions.filter(function(action){
-    return action.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+  var matchTodos = db.get('todos').value().filter(function(todo){
+    return todo.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
   })
   res.render('index',{
-    actions: matchAction
+    todos: matchTodos
   });
 });
 
 app.post("/todos/create", (req, res) => {
-  actions.push(req.body);
+  db.get('todos').push(req.body).write();
   res.redirect("/");
 })
 
