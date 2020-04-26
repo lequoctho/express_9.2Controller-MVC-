@@ -1,3 +1,11 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": 1,
+      "text": "blah"
+    },
+    {
+      "name": "Lê Văn Tài"
+    }
+  ]
 }

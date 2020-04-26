@@ -19,7 +19,7 @@ const adapter = new FileSync('db.json');
 const db = low(adapter);
  
 // Set some defaults
-db.defaults({ todos: []}).write();
+//db.defaults({ todos: []}).write();
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (req, res) => {
