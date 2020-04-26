@@ -4,3 +4,7 @@ form(action="/todos")
 ul
   each action in actions
     li= action.name
+    
+form(action="/todos/create", method="POST")
+  input(type="text",name="name")
+  button Create
