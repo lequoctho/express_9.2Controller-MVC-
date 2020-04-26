@@ -16,7 +16,8 @@ var actions = [
   {id:1, name: 'đi chợ'},
   {id:2, name: 'nấu ăn'},
   {id:3, name: 'rửa bát'},
-  {id:4, name: 'học codersX'}
+  {id:4, name: 'học codersX'},
+  {id:5, name: 'đá bóng'}
 ];
 
 // https://expressjs.com/en/starter/basic-routing.html
