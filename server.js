@@ -9,6 +9,9 @@ const app = express();
 app.set('view engine','pug');
 app.set('views','./views');
 
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 var actions = [
   {id:1, name: 'đi chợ'},
   {id:2, name: 'nấu ăn'},
@@ -33,7 +36,10 @@ app.get("/todos", (req, res) => {
   });
 });
 
-app.get("")
+app.post("/todos/create", (req, res) => {
+  actions.push(req.body);
+  res.redirect("/");
+})
 
 // listen for requests :)
 app.listen(process.env.PORT, () => {
