@@ -6,7 +6,7 @@ ul
       span &nbsp 
       a(href="/users/" + user.id + "/delete/" ) Delete
       span &nbsp 
-      a(href="/users/update/" +user.id) Update
+      a(href="/users/"+user.id+"/update/" ) Update
     
 form(action="/users/create", method="POST")
   input(type="text",name="text")

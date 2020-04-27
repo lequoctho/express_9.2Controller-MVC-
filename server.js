@@ -48,7 +48,7 @@ app.post("/books/:id/update", (req, res)=> {
   var text = req.body;
   console.log(text);
   db.get('books').find({id: id}).assign(text).write();
-  db.get('posts').find({ title: 'low!' }).assign({ title: 'hi!'}).write()
+
   res.redirect("/books");
 });
 
@@ -79,20 +79,20 @@ app.get("/users/:id/delete", (req, res)=> {
   res.redirect("/users");
 });
 
-app.get("/users/update/:id", (req, res) => {
+app.get("/users/:id/update", (req, res) => {
   var id = req.params.id;
-  var book = dbUser.get('users').find({id: id}).value();
-  res.render('update',{
-    book: book
+  var user = dbUser.get('users').find({id: id}).value();
+  res.render('updateUser',{
+    user: user
   });
 });
 
 app.post("/users/:id/update", (req, res)=> {
   var id = req.params.id;
   var text = req.body;
-  console.log(text);
+
   dbUser.get('users').find({id: id}).assign(text).write();
-  dbUser.get('posts').find({ title: 'low!' }).assign({ title: 'hi!'}).write()
+  
   res.redirect("/users");
 });
 
