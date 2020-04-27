@@ -1,13 +1,11 @@
-form(action="/todos")
-  input(type="text",name="q",placeholder="sách")
-  button Search
+
 ul
-  each todo in todos
+  each book in books
     li
-      span= todo.text
+      span= book.text
       span &nbsp 
-      a(href="/todos/" + todo.id + "/delete/" ) Delete
+      a(href="/books/" + book.id + "/delete/" ) Delete
     
-form(action="/todos/create", method="POST")
+form(action="/books/create", method="POST")
   input(type="text",name="text")
   button Create

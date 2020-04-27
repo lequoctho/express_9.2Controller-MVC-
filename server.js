@@ -19,37 +19,24 @@ const FileSync = require('lowdb/adapters/FileSync');
  
 const adapter = new FileSync('db.json');
 const db = low(adapter);
- 
-// Set some defaults
-//db.defaults({ todos: []}).write();
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/books", (req, res) => {
   res.render('index',{
-    todos: db.get('books').value()
+    books: db.get('books').value()
   });
 });
 
-app.get("/todos", (req, res) => {
-  var q = req.query.q;
-  var matchTodos = db.get('todos').value().filter(function(todo){
-    return todo.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-  })
-  res.render('index',{
-    todos: matchTodos
-  });
-});
-
-app.get("/todos/:id/delete", (req, res)=> {
+app.get("/books/:id/delete", (req, res)=> {
   var id = req.params.id;
-  var todo = db.get('todos').find({id: id}).value();
-  db.get('todos').remove(todo).write();
+  var todo = db.get('books').find({id: id}).value();
+  db.get('books').remove(todo).write();
   res.redirect("/");
 });
 
-app.post("/todos/create", (req, res) => {
+app.post("/books/create", (req, res) => {
   req.body.id = shortid.generate();
-  db.get('todos').push(req.body).write();
+  db.get('books').push(req.body).write();
   res.redirect("/");
 })
 
