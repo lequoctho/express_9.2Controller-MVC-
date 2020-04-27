@@ -38,7 +38,7 @@ app.get("/books/update/:id", (req, res) => {
   var id = req.params.id;
   var book = db.get('books').find({id: id}).value();
   res.render('update',{
-    user: book
+    book: book
   });
 });
 

@@ -1,6 +1,6 @@
 h1 Update
-form(action="/books"+user.id+"/update", method="POST")
+form(action="/books/"+book.id+"/update", method="POST")
   span Name 
   span &nbsp
-  input(type="text",name="text", value=user.text)
+  input(type="text",name="text", value=book.text)
   button Update
