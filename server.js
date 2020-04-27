@@ -31,14 +31,21 @@ app.get("/books/:id/delete", (req, res)=> {
   var id = req.params.id;
   var todo = db.get('books').find({id: id}).value();
   db.get('books').remove(todo).write();
-  res.redirect("/");
+  res.redirect("/books");
+});
+
+pp.get("/books/:id/delete", (req, res)=> {
+  var id = req.params.id;
+  var todo = db.get('books').find({id: id}).value();
+  db.get('books').remove(todo).write();
+  res.redirect("/books");
 });
 
 app.post("/books/create", (req, res) => {
   req.body.id = shortid.generate();
   db.get('books').push(req.body).write();
-  res.redirect("/");
-})
+  res.redirect("/books");
+});
 
 // listen for requests :)
 app.listen(process.env.PORT, () => {

@@ -5,6 +5,8 @@ ul
       span= book.text
       span &nbsp 
       a(href="/books/" + book.id + "/delete/" ) Delete
+      span &nbsp 
+      a(href="/books/" + book.id + "/update/" ) Update
     
 form(action="/books/create", method="POST")
   input(type="text",name="text")
