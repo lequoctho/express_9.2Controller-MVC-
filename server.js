@@ -16,7 +16,49 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
- 
+
+
+const adapter = new FileSync('db.json');
+const db = low(adapter);
+
+// https://expressjs.com/en/starter/basic-routing.html
+app.get("/books", (req, res) => {
+  res.render('index',{
+    books: db.get('books').value()
+  });
+});
+
+app.get("/books/:id/delete", (req, res)=> {
+  var id = req.params.id;
+  var book = db.get('books').find({id: id}).value();
+  db.get('books').remove(book).write();
+  res.redirect("/books");
+});
+
+app.get("/books/update/:id", (req, res) => {
+  var id = req.params.id;
+  var book = db.get('books').find({id: id}).value();
+  res.render('update',{
+    book: book
+  });
+});
+
+app.post("/books/:id/update", (req, res)=> {
+  var id = req.params.id;
+  var text = req.body;
+  console.log(text);
+  db.get('books').find({id: id}).assign(text).write();
+  db.get('posts').find({ title: 'low!' }).assign({ title: 'hi!'}).write()
+  res.redirect("/books");
+});
+
+app.post("/books/create", (req, res) => {
+  req.body.id = shortid.generate();
+  db.get('books').push(req.body).write();
+  res.redirect("/books");
+});
+
+// user
 const adapter = new FileSync('db.json');
 const db = low(adapter);
 
