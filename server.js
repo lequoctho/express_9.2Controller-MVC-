@@ -40,7 +40,12 @@ app.get("/todos", (req, res) => {
   });
 });
 
-app.get("/todos/delete/")
+app.get("/todos/:id/delete", (req, res)=> {
+  var id = req.params.id;
+  var todo = db.get('todos').find({id: id}).value();
+  db.get('todos').remove(todo).write();
+  res.redirect("/");
+});
 
 app.post("/todos/create", (req, res) => {
   req.body.id = shortid.generate();

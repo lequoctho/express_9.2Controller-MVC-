@@ -6,7 +6,7 @@ ul
     li
       span= todo.text
       span &nbsp 
-      a(href="/todos/delete/" + todo.id) Delete
+      a(href="/todos/" + todo.id + "/delete/" ) Delete
     
 form(action="/todos/create", method="POST")
   input(type="text",name="text")
