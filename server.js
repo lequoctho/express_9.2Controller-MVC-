@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 
-
+// book
 const adapter = new FileSync('db.json');
 const db = low(adapter);
 
@@ -59,44 +59,47 @@ app.post("/books/create", (req, res) => {
 });
 
 // user
-const adapter = new FileSync('db.json');
-const db = low(adapter);
+const adapterUser = new FileSync('dbUser.json');
+const dbUser = low(adapterUser);
+
+// Set some defaults
+dbUser.defaults({users: []}).write();
 
 // https://expressjs.com/en/starter/basic-routing.html
-app.get("/books", (req, res) => {
-  res.render('index',{
-    books: db.get('books').value()
+app.get("/users", (req, res) => {
+  res.render('indexUsers',{
+    users: dbUser.get('users').value()
   });
 });
 
-app.get("/books/:id/delete", (req, res)=> {
+app.get("/users/:id/delete", (req, res)=> {
   var id = req.params.id;
-  var book = db.get('books').find({id: id}).value();
-  db.get('books').remove(book).write();
-  res.redirect("/books");
+  var book = dbUser.get('users').find({id: id}).value();
+  dbUser.get('users').remove(book).write();
+  res.redirect("/users");
 });
 
-app.get("/books/update/:id", (req, res) => {
+app.get("/users/update/:id", (req, res) => {
   var id = req.params.id;
-  var book = db.get('books').find({id: id}).value();
+  var book = dbUser.get('users').find({id: id}).value();
   res.render('update',{
     book: book
   });
 });
 
-app.post("/books/:id/update", (req, res)=> {
+app.post("/users/:id/update", (req, res)=> {
   var id = req.params.id;
   var text = req.body;
   console.log(text);
-  db.get('books').find({id: id}).assign(text).write();
-  db.get('posts').find({ title: 'low!' }).assign({ title: 'hi!'}).write()
-  res.redirect("/books");
+  dbUser.get('users').find({id: id}).assign(text).write();
+  dbUser.get('posts').find({ title: 'low!' }).assign({ title: 'hi!'}).write()
+  res.redirect("/users");
 });
 
-app.post("/books/create", (req, res) => {
+app.post("/users/create", (req, res) => {
   req.body.id = shortid.generate();
-  db.get('books').push(req.body).write();
-  res.redirect("/books");
+  dbUser.get('users').push(req.body).write();
+  res.redirect("/users");
 });
 
 // listen for requests :)
