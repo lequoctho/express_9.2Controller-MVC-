@@ -24,7 +24,7 @@ const db = low(adapter);
 //db.defaults({ todos: []}).write();
 
 // https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (req, res) => {
+app.get("/books", (req, res) => {
   res.render('index',{
     todos: db.get('todos').value()
   });
