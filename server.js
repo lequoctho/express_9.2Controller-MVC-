@@ -34,7 +34,7 @@ app.get("/books/:id/delete", (req, res)=> {
   res.redirect("/books");
 });
 
-app.get("/books/:id/update", (req, res) => {
+app.get("/books/update/:id", (req, res) => {
   var id = req.params.id;
   var book = db.get('books').find({id: id}).value();
   res.render('update',{
@@ -45,8 +45,9 @@ app.get("/books/:id/update", (req, res) => {
 app.post("/books/:id/update", (req, res)=> {
   var id = req.params.id;
   var text = req.body;
-  
+  console.log(text);
   db.get('books').find({id: id}).assign(text).write();
+  db.get('posts').find({ title: 'low!' }).assign({ title: 'hi!'}).write()
   res.redirect("/books");
 });
 

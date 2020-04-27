@@ -6,7 +6,7 @@ ul
       span &nbsp 
       a(href="/books/" + book.id + "/delete/" ) Delete
       span &nbsp 
-      a(href="/books/" + book.id + "/update/" ) Update
+      a(href="/books/update/" +book.id) Update
     
 form(action="/books/create", method="POST")
   input(type="text",name="text")
