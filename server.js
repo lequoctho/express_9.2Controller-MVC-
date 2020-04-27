@@ -29,15 +29,24 @@ app.get("/books", (req, res) => {
 
 app.get("/books/:id/delete", (req, res)=> {
   var id = req.params.id;
-  var todo = db.get('books').find({id: id}).value();
-  db.get('books').remove(todo).write();
+  var book = db.get('books').find({id: id}).value();
+  db.get('books').remove(book).write();
   res.redirect("/books");
 });
 
-pp.get("/books/:id/delete", (req, res)=> {
+app.get("/books/:id/update", (req, res) => {
   var id = req.params.id;
-  var todo = db.get('books').find({id: id}).value();
-  db.get('books').remove(todo).write();
+  var book = db.get('books').find({id: id}).value();
+  res.render('update',{
+    user: book
+  });
+});
+
+app.post("/books/:id/update", (req, res)=> {
+  var id = req.params.id;
+  var text = req.body;
+  
+  db.get('books').find({id: id}).assign(text).write();
   res.redirect("/books");
 });
 
