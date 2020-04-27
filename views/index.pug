@@ -3,7 +3,10 @@ form(action="/todos")
   button Search
 ul
   each todo in todos
-    li= todo.text
+    li
+      span= todo.text
+      span &nbsp 
+      a(href="/todos/delete/" + todo.id) Delete
     
 form(action="/todos/create", method="POST")
   input(type="text",name="text")

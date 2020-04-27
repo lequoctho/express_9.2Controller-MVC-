@@ -6,6 +6,8 @@
 const express = require("express");
 const app = express();
 
+const shortid = require("shortid");
+
 app.set('view engine','pug');
 app.set('views','./views');
 
@@ -38,7 +40,10 @@ app.get("/todos", (req, res) => {
   });
 });
 
+app.get("/todos/delete/")
+
 app.post("/todos/create", (req, res) => {
+  req.body.id = shortid.generate();
   db.get('todos').push(req.body).write();
   res.redirect("/");
 })
