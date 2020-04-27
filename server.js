@@ -26,7 +26,7 @@ const db = low(adapter);
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/books", (req, res) => {
   res.render('index',{
-    todos: db.get('todos').value()
+    todos: db.get('books').value()
   });
 });
 
