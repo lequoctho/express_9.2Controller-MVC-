@@ -1,4 +1,8 @@
 const express = require("express");
+const shortid = require("shortid");
+
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
 
 const router = express.Router();
 
@@ -10,20 +14,20 @@ const dbUser = low(adapterUser);
 dbUser.defaults({users: []}).write();
 
 // https://expressjs.com/en/starter/basic-routing.html
-app.get("/users", (req, res) => {
+router.get("/", (req, res) => {
   res.render('indexUsers',{
     users: dbUser.get('users').value()
   });
 });
 
-app.get("/users/:id/delete", (req, res)=> {
+router.get("/:id/delete", (req, res)=> {
   var id = req.params.id;
   var book = dbUser.get('users').find({id: id}).value();
   dbUser.get('users').remove(book).write();
   res.redirect("/users");
 });
 
-app.get("/users/:id/update", (req, res) => {
+router.get("/:id/update", (req, res) => {
   var id = req.params.id;
   var user = dbUser.get('users').find({id: id}).value();
   res.render('updateUser',{
@@ -31,7 +35,7 @@ app.get("/users/:id/update", (req, res) => {
   });
 });
 
-app.post("/users/:id/update", (req, res)=> {
+router.post("/:id/update", (req, res)=> {
   var id = req.params.id;
   var text = req.body;
 
@@ -40,9 +44,11 @@ app.post("/users/:id/update", (req, res)=> {
   res.redirect("/users");
 });
 
-app.post("/users/create", (req, res) => {
+router.post("/create", (req, res) => {
   req.body.id = shortid.generate();
   dbUser.get('users').push(req.body).write();
   res.redirect("/users");
 });
+
+module.exports = 
 
