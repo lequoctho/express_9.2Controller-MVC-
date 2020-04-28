@@ -4,9 +4,13 @@
 // we've started you off with Express (https://expressjs.com/)
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
+const shortid = require("shortid");
+
+const routeUser = require("./routes/user.route");
+
 const app = express();
 
-const shortid = require("shortid");
+
 
 app.set('view engine','pug');
 app.set('views','./views');
@@ -58,7 +62,7 @@ app.post("/books/create", (req, res) => {
   res.redirect("/books");
 });
 
-app.use('/user',)
+app.use('/users', routeUser);
 
 // listen for requests :)
 app.listen(process.env.PORT, () => {

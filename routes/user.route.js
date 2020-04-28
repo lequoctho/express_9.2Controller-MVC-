@@ -15,7 +15,7 @@ dbUser.defaults({users: []}).write();
 
 // https://expressjs.com/en/starter/basic-routing.html
 router.get("/", (req, res) => {
-  res.render('indexUsers',{
+  res.render('users/index',{
     users: dbUser.get('users').value()
   });
 });
@@ -30,7 +30,7 @@ router.get("/:id/delete", (req, res)=> {
 router.get("/:id/update", (req, res) => {
   var id = req.params.id;
   var user = dbUser.get('users').find({id: id}).value();
-  res.render('updateUser',{
+  res.render('users/update',{
     user: user
   });
 });
@@ -50,5 +50,5 @@ router.post("/create", (req, res) => {
   res.redirect("/users");
 });
 
-module.exports = 
+module.exports = router;
 
