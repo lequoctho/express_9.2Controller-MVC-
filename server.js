@@ -10,7 +10,7 @@ const routeUser = require("./routes/user.route");
 
 const app = express();
 
-const db = require("db");
+const db = require("./db");
 
 app.set('view engine','pug');
 app.set('views','./views');
