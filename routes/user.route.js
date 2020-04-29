@@ -7,11 +7,8 @@ const FileSync = require('lowdb/adapters/FileSync');
 const router = express.Router();
 
 // user
-const adapterUser = new FileSync('dbUser.json');
+const adapterUser = new FileSync('db.json');
 const dbUser = low(adapterUser);
-
-// Set some defaults
-dbUser.defaults({users: []}).write();
 
 // https://expressjs.com/en/starter/basic-routing.html
 router.get("/", (req, res) => {
