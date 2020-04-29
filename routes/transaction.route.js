@@ -12,9 +12,10 @@ router.get("/", (req, res) => {
 });
 
 router.post("/create", (req, res) => {
-  req.body.id = shortid.generate();
-  db.get('transactions').push(req.body).write();
-  res.redirect("/transactions");
+  console.log('test'+req.body);
+  //req.body.id = shortid.generate();
+  //db.get('transactions').push(req.body).write();
+  //res.redirect("/transactions");
 });
 
 module.exports = router;
