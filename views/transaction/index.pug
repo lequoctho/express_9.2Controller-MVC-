@@ -1,4 +1,11 @@
 h1 Transaction
-select
-  each val in users
-    option= val
+form(action="/transaction/create", method="POST")
+  select
+    each val in users
+      option= val
+
+  select
+    each val in books
+      option= val
+      
+  button Create
