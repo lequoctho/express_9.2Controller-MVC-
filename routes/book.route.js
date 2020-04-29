@@ -12,10 +12,6 @@ router.get("/update/:id", controller.update);
 
 router.post("/:id/update", controller.updatePost);
 
-router.post("/create", (req, res) => {
-  req.body.id = shortid.generate();
-  db.get('books').push(req.body).write();
-  res.redirect("/books");
-});
+router.post("/create", controller.create);
 
 module.exports = router;
