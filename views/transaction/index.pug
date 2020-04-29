@@ -1,11 +1,9 @@
 h1 Transaction
 form(action="/transaction/create", method="POST")
   select
-    each val in users
+    each val in transactions.
       option= val
-
   select
     each val in books
       option= val
-      
   button Create

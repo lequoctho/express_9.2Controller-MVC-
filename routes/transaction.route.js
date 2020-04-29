@@ -1,14 +1,19 @@
 const express = require("express");
 const shortid = require("shortid");
 
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-
+const db = require("../db");
 const router = express.Router();
 
-// user
-const adapterUser = new FileSync('dbTransaction.json');
-const dbUser = low(adapterUser);
+router.get("/", (req, res) => {
+  res.render('transactions/index',{
+    transactions: db.get('transactions').value()
+  });
+});
 
-// Set some defaults
-dbUser.defaults({users: []}).write();
+router.post("/create", (req, res) => {
+  req.body.id = shortid.generate();
+  db.get('transactions').push(req.body).write();
+  res.redirect("/transactions");
+});
+
+module.exports = router;

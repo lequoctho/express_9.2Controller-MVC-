@@ -7,6 +7,7 @@ const express = require("express");
 const shortid = require("shortid");
 
 const routeUser = require("./routes/user.route");
+const routeTransaction = require("./routes/transaction.route");
 
 const app = express();
 
@@ -58,6 +59,8 @@ app.post("/books/create", (req, res) => {
 });
 
 app.use('/users', routeUser);
+
+app.use('/transactions', routeTransaction);
 
 // listen for requests :)
 app.listen(process.env.PORT, () => {
