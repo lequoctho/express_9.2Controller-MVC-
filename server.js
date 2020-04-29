@@ -8,6 +8,7 @@ const shortid = require("shortid");
 
 const routeUser = require("./routes/user.route");
 const routeTransaction = require("./routes/transaction.route");
+const routeBook = require("./routes/book.route");
 
 const app = express();
 
@@ -21,46 +22,11 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 
 
-// https://expressjs.com/en/starter/basic-routing.html
-app.get("/books", (req, res) => {
-  res.render('books/index',{
-    books: db.get('books').value()
-  });
-});
-
-app.get("/books/:id/delete", (req, res)=> {
-  var id = req.params.id;
-  var book = db.get('books').find({id: id}).value();
-  db.get('books').remove(book).write();
-  res.redirect("/books");
-});
-
-app.get("/books/update/:id", (req, res) => {
-  var id = req.params.id;
-  var book = db.get('books').find({id: id}).value();
-  res.render('books/update',{
-    book: book
-  });
-});
-
-app.post("/books/:id/update", (req, res)=> {
-  var id = req.params.id;
-  var text = req.body;
-  console.log(text);
-  db.get('books').find({id: id}).assign(text).write();
-
-  res.redirect("/books");
-});
-
-app.post("/books/create", (req, res) => {
-  req.body.id = shortid.generate();
-  db.get('books').push(req.body).write();
-  res.redirect("/books");
-});
-
 app.use('/users', routeUser);
 
 app.use('/transactions', routeTransaction);
+
+app.use('/books', routeBook);
 
 // listen for requests :)
 app.listen(process.env.PORT, () => {
