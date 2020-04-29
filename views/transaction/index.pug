@@ -2,7 +2,7 @@ h1 Transaction
 form(action="/transaction/create", method="POST")
   select
     each val in users
-      option= val
+      ooption(value=val.id)= val.text 
   select
     each val in books
       option= val
