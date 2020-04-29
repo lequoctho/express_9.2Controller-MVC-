@@ -10,7 +10,7 @@ const routeUser = require("./routes/user.route");
 
 const app = express();
 
-
+const db = require("db");
 
 app.set('view engine','pug');
 app.set('views','./views');
@@ -18,12 +18,7 @@ app.set('views','./views');
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
 
-// book
-const adapter = new FileSync('db.json');
-const db = low(adapter);
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/books", (req, res) => {
