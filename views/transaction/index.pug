@@ -1,7 +1,7 @@
 h1 Transaction
 form(action="/transaction/create", method="POST")
   select
-    each val in transactions.
+    each val in users
       option= val
   select
     each val in books

@@ -5,8 +5,9 @@ const db = require("../db");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render('transactions/index',{
-    transactions: db.get('transactions').value()
+  res.render('transaction/index',{
+    users: db.get('users').value(),
+    books: db.get('books').value()
   });
 });
 
