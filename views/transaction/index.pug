@@ -1,9 +1,9 @@
 h1 Transaction
 form(action="/transactions/create", method="POST", id="transactionForm")
-  select(form="transactionForm")
+  select(form="transactionForm", name="userId")
     each val in users
       option(value=val.id)= val.text 
-  select(form="transactionForm")
+  select(form="transactionForm", name="bookId")
     each val in books
       option(value=val.id)= val.text 
   button Create
