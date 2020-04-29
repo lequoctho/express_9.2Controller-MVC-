@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/books", (req, res) => {
-  res.render('index',{
+  res.render('books/index',{
     books: db.get('books').value()
   });
 });
@@ -38,7 +38,7 @@ app.get("/books/:id/delete", (req, res)=> {
 app.get("/books/update/:id", (req, res) => {
   var id = req.params.id;
   var book = db.get('books').find({id: id}).value();
-  res.render('update',{
+  res.render('books/update',{
     book: book
   });
 });
