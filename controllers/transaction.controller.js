@@ -5,9 +5,10 @@ module.exports.index = (req, res) => {
   var users = db.get('users').value();
   var books = db.get('books').value();
   var transactions = db.get('transactions').value().map((objTransaction) => {
+    console.log(objTransaction);
     var user = users.find(user=>user.id === objTransaction.userId);
     var book = books.find(book=>book.id === objTransaction.bookId);
-    console.log(user);
+    
     objTransaction.userId = user.text;
     objTransaction.bookId = book.text;
     return objTransaction;
