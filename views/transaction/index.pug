@@ -1,5 +1,6 @@
 h1 Transaction
 
+form(action="/transactions/create", method="POST", id="transactionForm")
 ul
   each transaction in transactions
     li
@@ -7,8 +8,8 @@ ul
       span &nbsp 
       span= transaction.bookId
       span &nbsp 
-      //a(href="/users/" + user.id + "/delete/" ) Delete
-      
+      if transaction.complete
+        a(href="/transactions/" + transaction.id + "/complete/" ) Complete
 
 form(action="/transactions/create", method="POST", id="transactionForm")
   select(form="transactionForm", name="userId")

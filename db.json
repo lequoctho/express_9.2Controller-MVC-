@@ -31,16 +31,19 @@
     {
       "userId": "EnSaAFYtO",
       "bookId": "f3TVXj1tq",
+      "complete": "false",
       "id": "EnSaAFYtP"
     },
     {
       "userId": "EnSaAFYtO",
       "bookId": "EnSaAFYtO",
+      "complete": "false",
       "id": "6JsDW5OG1"
     },
     {
       "userId": "Q5MmmtkPW",
       "bookId": "QxWLO6VO-",
+      "complete": "false",
       "id": "4iHtfnMc5"
     }
   ]
