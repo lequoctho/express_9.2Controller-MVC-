@@ -30,21 +30,9 @@
   "transactions": [
     {
       "userId": "Tho",
-      "bookId": "Văn",
-      "complete": "false",
-      "id": "EnSaAFYtP"
-    },
-    {
-      "userId": "Tho",
       "bookId": "Toá",
-      "complete": "false",
-      "id": "6JsDW5OG1"
-    },
-    {
-      "userId": "Lin",
-      "bookId": "Lý",
-      "complete": true,
-      "id": "4iHtfnMc5"
+      "id": "LR2llyfXf",
+      "complete": true
     }
   ]
 }
