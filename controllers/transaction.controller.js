@@ -5,8 +5,11 @@ module.exports.index = (req, res) => {
   var users = db.get('users').value();
   var books = db.get('books').value();
   var transactions = db.get('transactions').value().map((objTransaction) => {
-    objTransaction.userId = users.find(user=>user.id === objTransaction.userId).text;
-    objTransaction.bookId = books.find(book=>book.id === objTransaction.bookId).text;
+    var user = users.find(user=>user.id === objTransaction.userId);
+    var book = books.find(book=>book.id === objTransaction.bookId);
+    console.log(user);
+    objTransaction.userId = user.text;
+    objTransaction.bookId = book.text;
     return objTransaction;
   });
   res.render('transaction/index',{
@@ -17,9 +20,16 @@ module.exports.index = (req, res) => {
 };
   
 module.exports.create = (req, res) => {
-  
   req.body.id = shortid.generate();
   db.get('transactions').push(req.body).write();
-  console.log(req.body);
+
   res.redirect("/transactions");
 };
+
+module.exports.complete = (req, res) => {
+  var id = req.params.id;
+
+  db.get('transactions').find({id: id}).assign({complete: true}).write();
+
+  res.redirect("/transactions");
+}
