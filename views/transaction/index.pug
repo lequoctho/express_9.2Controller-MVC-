@@ -1,4 +1,16 @@
 h1 Transaction
+
+ul
+  each transaction in transactions
+    li
+      if transaction.
+      span= transaction.u
+      
+      span &nbsp 
+      a(href="/users/" + user.id + "/delete/" ) Delete
+      span &nbsp 
+      a(href="/users/"+user.id+"/update/" ) Update
+
 form(action="/transactions/create", method="POST", id="transactionForm")
   select(form="transactionForm", name="userId")
     each val in users

@@ -4,7 +4,8 @@ const shortid = require("shortid");
 module.exports.index = (req, res) => {
   res.render('transaction/index',{
     users: db.get('users').value(),
-    books: db.get('books').value()
+    books: db.get('books').value(),
+    transactions: db.get('transactions').value()
   });
 };
   
