@@ -3,22 +3,22 @@ const shortid = require("shortid");
 
 module.exports.index = (req, res) => {
    var users = db.get('users').value();
-//   console.log(users);
    var books = db.get('books').value();
-   var transactionsDB = db.get('transactions').value();
-//   var transactions = transactionsDB.map((objTransaction) => {
-//     console.log(objTransaction);
-//     var user = users.find(user=>user.id === objTransaction.userId);
-//     var book = books.find(book=>book.id === objTransaction.bookId);
+   var transactionsDB = JSON.parse(JSON.stringify(db.get('transactions').value()));
+   console.log(transactionsDB);
+   var transactions = transactionsDB.map((objTransaction) => {
     
-//     objTransaction.userId = user.text;
-//     objTransaction.bookId = book.text;
-//     return objTransaction;
-//   });
+    var user = users.find(user=>user.id === objTransaction.userId);
+    var book = books.find(book=>book.id === objTransaction.bookId);
+    
+    objTransaction.userId = user.text;
+    objTransaction.bookId = book.text;
+    return objTransaction;
+  });
   res.render('transaction/index',{
     users: users,
     books: books,
-    transactions: transactionsDB
+    transactions: transactions
   });
 };
   
