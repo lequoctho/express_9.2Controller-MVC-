@@ -3,6 +3,7 @@ const shortid = require("shortid");
 
 module.exports.index = (req, res) => {
   var users = db.get('users').value();
+  console.log(users);
   var books = db.get('books').value();
   var transactionsDB = db.get('transactions').value();
   var transactions = transactionsDB.map((objTransaction) => {
